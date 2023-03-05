@@ -1,8 +1,10 @@
 package com.example.swagger.controller;
 
+import com.example.swagger.dtos.CreateUserDto;
 import com.example.swagger.dtos.UserDto;
 import com.example.swagger.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +23,8 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto create(@RequestBody UserDto userDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto create(@RequestBody CreateUserDto userDto) {
         return userService.createUser(userDto);
     }
 

@@ -1,13 +1,13 @@
 package com.example.swagger.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.UUID;
 
-@Entity()
+@Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
@@ -16,6 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "uuid")
     private UUID id;
     private String name;
     private int age;

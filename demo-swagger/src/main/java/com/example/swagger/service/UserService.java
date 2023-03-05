@@ -1,6 +1,7 @@
 package com.example.swagger.service;
 
 import com.example.swagger.common.exceptions.NotFoundException;
+import com.example.swagger.dtos.CreateUserDto;
 import com.example.swagger.dtos.UserDto;
 import com.example.swagger.entity.User;
 import com.example.swagger.repository.UserRepository;
@@ -21,21 +22,30 @@ public class UserService {
         List<User> users = userRepository.findAll();
         List<UserDto> userDTOs = new ArrayList<>();
         for (User user:users) {
-            var dto = new UserDto(user.getId(), user.getName(), user.getAge(), user.getSalary());
+//            var dto = new UserDto(user.getId(), user.getName(), user.getAge(), user.getSalary());
+            var dto = new UserDto();
+            dto.setId(user.getId());
+            dto.setName(user.getName());
+            dto.setAge(user.getAge());
+            dto.setSalary(user.getSalary());
             userDTOs.add(dto);
         }
 
         return userDTOs;
     }
-    public UserDto createUser(UserDto userDto) {
+    public UserDto createUser(CreateUserDto userDto) {
         var user = new User();
         user.setName(userDto.getName());
         user.setAge(userDto.getAge());
         user.setSalary(userDto.getSalary());
         userRepository.save(user);
 
-        userDto.setId(user.getId());
-        return userDto;
+        UserDto dto = new UserDto();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        dto.setAge(user.getAge());
+        dto.setSalary(user.getSalary());
+        return dto;
     }
 
     public UserDto updateUser(UUID id, UserDto userDto) {

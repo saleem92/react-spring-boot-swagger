@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto extends CreateUserDto {
-    private UUID id;
+public class CreateUserDto {
+    private String name;
+    private int age;
+    private int salary;
 }
